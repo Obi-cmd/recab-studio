@@ -1,19 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recab Studio 3.10</title>
   <link rel="icon" href="assets/recab-logo.png" type="image/png" />
   <style>
+    :root {
+      --bg-dark: #0d1117;
+      --fg-dark: #c9d1d9;
+      --card-dark: #161b22;
+      --border-dark: #30363d;
+      --accent: #3b82f6;
+      --green: #2ea043;
+
+      --bg-light: #ffffff;
+      --fg-light: #1f2937;
+      --card-light: #f3f4f6;
+      --border-light: #d1d5db;
+    }
+    [data-theme="dark"] {
+      --bg: var(--bg-dark);
+      --fg: var(--fg-dark);
+      --card: var(--card-dark);
+      --border: var(--border-dark);
+    }
+    [data-theme="light"] {
+      --bg: var(--bg-light);
+      --fg: var(--fg-light);
+      --card: var(--card-light);
+      --border: var(--border-light);
+    }
+
     * {
       margin: 0; padding: 0; box-sizing: border-box;
     }
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: #0d1117;
-      color: #c9d1d9;
-      line-height: 1.6;
+    html, body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      transition: background 0.4s ease, color 0.4s ease;
     }
     header {
       text-align: center;
@@ -24,7 +50,7 @@
     header img {
       width: 72px;
       height: 72px;
-      border-radius: 50%;
+      border-radius: 12px;
     }
     header h1 {
       font-size: 2.5rem;
@@ -34,73 +60,106 @@
       font-size: 1.1rem;
       color: #e2e8f0;
     }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .theme-toggle button {
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: #111827;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
     nav {
-      background: #161b22;
+      background: var(--card);
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1.2rem;
       padding: 1rem;
-      border-bottom: 1px solid #30363d;
+      border-bottom: 1px solid var(--border);
     }
     nav a {
-      color: #58a6ff;
+      color: var(--accent);
       text-decoration: none;
       font-weight: 600;
     }
     nav a:hover {
       text-decoration: underline;
     }
+
     .container {
       max-width: 1000px;
       margin: auto;
       padding: 2rem 1rem;
     }
+
     .card {
-      background: #161b22;
+      background: var(--card);
       margin: 1.5rem 0;
       padding: 2rem;
       border-radius: 1rem;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      border: 1px solid #30363d;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.02);
     }
     .card h2 {
       margin-bottom: 1rem;
-      color: #f0f6fc;
     }
+
     .downloads a {
       display: inline-block;
       margin: 0.5rem 1rem 0.5rem 0;
       padding: 0.75rem 1.5rem;
       border-radius: 0.5rem;
-      background: #238636;
+      background: var(--green);
       color: white;
       font-weight: bold;
       text-decoration: none;
     }
     .downloads a:hover {
-      background: #2ea043;
+      background: #238636;
     }
+
     ul {
       margin-top: 1rem;
       padding-left: 1.5rem;
     }
-    li {
-      margin: 0.4rem 0;
-    }
+
     footer {
       text-align: center;
-      color: #8b949e;
+      color: var(--fg);
       padding: 2.5rem 1rem;
       font-size: 0.95rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
 
+  <div class="theme-toggle">
+    <button onclick="toggleTheme()">Toggle Theme</button>
+  </div>
+
   <header>
     <img src="assets/recab-logo.png" alt="Recab Logo">
     <h1>Recab Studio</h1>
-    <p>Powerful Multi-language IDE with Visual Tools & AI</p>
+    <p>Multi-language Coding Platform with Visual Tools & Gemini AI</p>
+    <p><a href="https://github.com/obi-cmd/recab-studio" target="_blank" style="color: #bbf7d0;">View on GitHub</a></p>
   </header>
 
   <nav>
@@ -112,7 +171,6 @@
   </nav>
 
   <main class="container">
-
     <section id="download" class="card">
       <h2>📦 Download Recab Studio</h2>
       <p>Choose your version:</p>
@@ -126,40 +184,44 @@
     <section id="features" class="card">
       <h2>✨ Features</h2>
       <ul>
-        <li>🔁 Language switcher: Python, JS, Blocks (Blockly)</li>
-        <li>🧠 Gemini-powered Recab AI (1.5 Pro + 2.5 fallback)</li>
-        <li>📦 Built-in terminal (pip, system tools, batch)</li>
-        <li>🧱 Blockly visual editor with dynamic code sync</li>
-        <li>🖥 Tabbed editor, live preview, and versioning</li>
-        <li>🔌 Extensions, plugin support, and theme control</li>
+        <li>🔁 Switch languages: Python, JavaScript, Blockly</li>
+        <li>🧠 Gemini AI (1.5 + 2.5 fallback) for coding assistance</li>
+        <li>📂 Tabbed editor, built-in terminal & extension support</li>
+        <li>🎨 Modern UI with theme switching</li>
+        <li>📦 Portable or installer options</li>
       </ul>
     </section>
 
     <section id="ai" class="card">
       <h2>🤖 Recab AI</h2>
-      <p>Get coding help instantly with Gemini:</p>
       <ul>
-        <li>Ask programming questions in any language</li>
-        <li>Use “Insert to Code” to add it directly to the editor</li>
-        <li>Or “Keep in Response” for review or docs</li>
-        <li>Fully integrated into Recab’s side panel</li>
+        <li>Sidebar integration for prompting Gemini API</li>
+        <li>Options to insert AI output directly to your code</li>
+        <li>Supports multiple models (1.5 Pro / 2.5 Flash fallback)</li>
       </ul>
     </section>
 
     <section id="changelog" class="card">
       <h2>📜 Changelog</h2>
       <ul>
-        <li><strong>v3.10</strong> – Gemini AI, PyInstaller builds, terminal, version.json, AI fallback</li>
-        <li><strong>v3.0</strong> – Switch languages live, sidebar UI, AI 1.0</li>
-        <li><strong>v2.0</strong> – First full editor with Blockly & stage view</li>
+        <li><strong>v3.10</strong> — Gemini AI, Terminal, Installer + Portable</li>
+        <li><strong>v3.0</strong> — Multi-language switcher, Recab AI v1</li>
+        <li><strong>v2.0</strong> — Blockly, stage-based visual coding</li>
       </ul>
     </section>
-
   </main>
 
   <footer>
-    &copy; 2025 Obiakor Studios — Recab Studio 3.10 • All rights reserved.
+    &copy; 2025 Obiakor Studios — <a href="https://github.com/obi-cmd/recab-studio" target="_blank">github.com/obi-cmd/recab-studio</a>
   </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    }
+  </script>
 
 </body>
 </html>
