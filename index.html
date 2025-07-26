@@ -2,167 +2,126 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recab Studio 3.10</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/recab-logo.png">
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: "Segoe UI", sans-serif;
       background: #0e0e0e;
-      color: #f0f0f0;
+      color: #fff;
     }
     header {
-      background: linear-gradient(90deg, #2c3e50, #1abc9c);
+      background: linear-gradient(90deg, #4f46e5, #3b82f6);
       padding: 2rem;
       text-align: center;
-      color: white;
     }
-    header h1 {
+    h1 {
       font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-    header p {
-      font-size: 1.1rem;
+      margin: 0;
     }
     nav {
-      background: #111;
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      padding: 1rem;
-      border-bottom: 1px solid #333;
+      margin-top: 1rem;
     }
     nav a {
-      color: #78f5b2;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    section {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem;
-      border-bottom: 1px solid #222;
-    }
-    h2 {
-      color: #00ffe7;
-    }
-    .downloads a {
-      display: inline-block;
-      margin: 0.5rem 1rem 1rem 0;
-      padding: 0.8rem 1.2rem;
-      border-radius: 8px;
-      background: #1abc9c;
+      margin: 0 1rem;
       color: white;
-      font-weight: bold;
       text-decoration: none;
+      font-weight: bold;
     }
-    .downloads a:hover {
-      background: #16a085;
-    }
-    pre {
-      background: #1a1a1a;
-      padding: 1rem;
-      border-radius: 8px;
-      font-family: 'Fira Code', monospace;
-      white-space: pre-wrap;
-      overflow-x: auto;
-    }
-    .feature-box {
-      background: #181818;
-      border-left: 4px solid #1abc9c;
-      margin: 1rem 0;
-      padding: 1rem;
-      border-radius: 6px;
-    }
-    .footer {
-      background: #111;
-      padding: 2rem;
+    .hero {
       text-align: center;
+      padding: 3rem 1rem;
+    }
+    .hero h2 {
+      font-size: 2rem;
+    }
+    .download-buttons a {
+      display: inline-block;
+      margin: 1rem;
+      padding: 1rem 2rem;
+      background-color: #3b82f6;
+      color: white;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-weight: bold;
+    }
+    .section {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .card {
+      background: #1e1e1e;
+      padding: 1rem;
+      border-radius: 1rem;
+      margin: 1rem 0;
+      box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
       font-size: 0.9rem;
       color: #aaa;
-    }
-    .badge {
-      display: inline-block;
-      background: #2ecc71;
-      color: #000;
-      font-weight: bold;
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      margin-left: 0.5rem;
-    }
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
     }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>Recab Studio 3.10 <span class="badge">Latest</span></h1>
-    <p>The ultimate AI-powered code editor with Gemini, Blockly, and terminal magic.</p>
+    <h1>Recab Studio 3.10</h1>
+    <nav>
+      <a href="#download">Download</a>
+      <a href="#features">Features</a>
+      <a href="#changelog">Changelog</a>
+      <a href="#ai">Recab AI</a>
+      <a href="#github">GitHub</a>
+    </nav>
   </header>
 
-  <nav>
-    <a href="#features">Features</a>
-    <a href="#download">Download</a>
-    <a href="#changelog">Changelog</a>
-    <a href="#credits">Credits</a>
-  </nav>
+  <div class="hero">
+    <h2>Visual & Code Editor with AI, Blockly, and Language Switching</h2>
+    <div class="download-buttons" id="download">
+      <a href="downloads/RecabStudio_3.10_Setup.exe">⬇ Installer</a>
+      <a href="downloads/RecabStudio_3.10_Portable.zip">⬇ Portable ZIP</a>
+      <a href="downloads/recab3.py">🧠 Source Code</a>
+    </div>
+  </div>
 
-  <section id="features">
-    <h2>🔥 Key Features</h2>
-    <div class="feature-box">💬 Gemini AI (2.0 flash + fallback to 2.5) — Smart code assistant with insert and keep modes</div>
-    <div class="feature-box">📁 Multi-language editing — Python, JS, C++, HTML, Lua</div>
-    <div class="feature-box">🧱 Blockly Mode — Drag-and-drop coding toggle</div>
-    <div class="feature-box">📦 Tabbed Interface — Open multiple files and output tabs</div>
-    <div class="feature-box">📟 Collapsible Terminal — Run Python, JS, and pip commands</div>
-    <div class="feature-box">🎨 Dark/light theming — Fully styled with Recab gradients</div>
-    <div class="feature-box">🧠 AI Sidebar — Insert to code or save response with chat history export</div>
-    <div class="feature-box">🔄 Auto-updater ready — Connected to online version.json</div>
+  <section class="section" id="features">
+    <h2>Features</h2>
+    <div class="card">⚙ Switch between Python, JavaScript, and Blocks</div>
+    <div class="card">🧱 Integrated Blockly Editor</div>
+    <div class="card">🧠 Recab AI (Gemini-based assistant with insert-to-code)</div>
+    <div class="card">📦 Plugin/extension system</div>
+    <div class="card">🖥 Built-in terminal with pip support</div>
+    <div class="card">📁 Project management + tabs</div>
   </section>
 
-  <section id="download">
-    <h2>📥 Download Recab Studio</h2>
-    <p>Choose your version:</p>
-    <div class="downloads">
-      <a href="downloads/RecabStudio_3.10_Setup.exe">⬇ Download Installer (.exe)</a>
-      <a href="downloads/RecabStudio_3.10_Portable.zip">⬇ Download Portable (.zip)</a>
-      <a href="downloads/recab3.py">⬇ View Source Code (recab3.py)</a>
+  <section class="section" id="changelog">
+    <h2>Changelog</h2>
+    <div class="card">✅ 3.10: Gemini sidebar, full .exe bundler, terminal, and AI fallback</div>
+    <div class="card">✅ 3.0: Language switcher, themes, AI support</div>
+    <div class="card">✅ 2.0: Portable version and real-time preview</div>
+  </section>
+
+  <section class="section" id="ai">
+    <h2>Recab AI</h2>
+    <div class="card">
+      Uses Google Gemini API (1.5 Pro or 2.5 Flash fallback)
+      <br />Supports: Text prompts, code generation, insert-to-code and keep-in-response
     </div>
   </section>
 
-  <section id="changelog">
-    <h2>📜 Changelog</h2>
-    <pre>
-3.10 (Current)
-✔ Gemini AI 2.0 + fallback to 2.5
-✔ AI sidebar with insert/keep/export
-✔ Tabs and output view per file
-✔ Blockly toggle and language switch
-✔ Terminal with pip and command runner
-✔ Dark/light theme toggle
-✔ Auto updater support
-✔ Full installer + portable build
-    </pre>
+  <section class="section" id="github">
+    <h2>GitHub</h2>
+    <div class="card">
+      Project page: <a href="https://github.com/obi-cmd/recab-studio" style="color:#60a5fa;">obi-cmd/recab-studio</a>
+    </div>
   </section>
 
-  <section id="credits">
-    <h2>👨‍💻 Credits</h2>
-    <p>Developed by <strong>Obiakor Studios</strong> — designed with care by Daniel & Emmanuel 🇳🇬</p>
-    <p>Icons by Icons8. Powered by Gemini AI and Python.</p>
-  </section>
-
-  <div class="footer">
-    &copy; 2025 Recab Studio 3.10 — Built with love. <br />
-    View on <a href="https://github.com/obi-cmd/recab-studio" style="color:#78f5b2;">GitHub</a>
-  </div>
-
+  <footer>
+    &copy; 2025 Obiakor Studios. All rights reserved.
+  </footer>
 </body>
 </html>
