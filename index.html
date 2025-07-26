@@ -3,132 +3,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recab Studio</title>
-  <link rel="icon" type="image/png" href="assets/recab-logo.png">
+  <title>Recab Studio 3.10</title>
+  <link rel="icon" href="assets/recab-logo.png" type="image/png" />
   <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #0a0a0a;
-      color: #f0f0f0;
+      font-family: "Segoe UI", sans-serif;
+      background: #0d1117;
+      color: #c9d1d9;
       line-height: 1.6;
     }
     header {
-      background: linear-gradient(90deg, #6366f1, #3b82f6);
-      padding: 2rem;
       text-align: center;
+      padding: 3rem 1rem 2rem;
+      background: linear-gradient(135deg, #4f46e5, #3b82f6);
       color: white;
     }
     header img {
-      width: 64px;
-      height: 64px;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
     }
     header h1 {
-      font-size: 2.8rem;
-      margin: 0.5rem 0;
+      font-size: 2.5rem;
+      margin: 1rem 0 0.2rem;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #e2e8f0;
     }
     nav {
-      margin-top: 1rem;
+      background: #161b22;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1rem;
+      border-bottom: 1px solid #30363d;
     }
     nav a {
-      margin: 0 0.75rem;
-      color: #ffffff;
+      color: #58a6ff;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+    }
+    nav a:hover {
+      text-decoration: underline;
     }
     .container {
-      max-width: 960px;
+      max-width: 1000px;
       margin: auto;
       padding: 2rem 1rem;
     }
     .card {
-      background: #1e1e1e;
-      padding: 1.5rem;
-      margin: 1rem 0;
+      background: #161b22;
+      margin: 1.5rem 0;
+      padding: 2rem;
       border-radius: 1rem;
-      box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border: 1px solid #30363d;
     }
     .card h2 {
-      margin-top: 0;
+      margin-bottom: 1rem;
+      color: #f0f6fc;
     }
     .downloads a {
       display: inline-block;
       margin: 0.5rem 1rem 0.5rem 0;
       padding: 0.75rem 1.5rem;
       border-radius: 0.5rem;
-      background: #3b82f6;
+      background: #238636;
       color: white;
       font-weight: bold;
       text-decoration: none;
     }
+    .downloads a:hover {
+      background: #2ea043;
+    }
+    ul {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+    li {
+      margin: 0.4rem 0;
+    }
     footer {
       text-align: center;
-      color: #aaa;
-      padding: 2rem 1rem;
+      color: #8b949e;
+      padding: 2.5rem 1rem;
+      font-size: 0.95rem;
     }
   </style>
 </head>
 <body>
+
   <header>
     <img src="assets/recab-logo.png" alt="Recab Logo">
-    <h1>Recab Studio 3.10</h1>
-    <nav>
-      <a href="#download">Download</a>
-      <a href="#features">Features</a>
-      <a href="#changelog">Changelog</a>
-      <a href="#ai">Recab AI</a>
-      <a href="#github">GitHub</a>
-    </nav>
+    <h1>Recab Studio</h1>
+    <p>Powerful Multi-language IDE with Visual Tools & AI</p>
   </header>
 
-  <div class="container">
+  <nav>
+    <a href="#download">Download</a>
+    <a href="#features">Features</a>
+    <a href="#ai">Recab AI</a>
+    <a href="#changelog">Changelog</a>
+    <a href="https://github.com/obi-cmd/recab-studio" target="_blank">GitHub</a>
+  </nav>
+
+  <main class="container">
+
     <section id="download" class="card">
       <h2>📦 Download Recab Studio</h2>
       <p>Choose your version:</p>
       <div class="downloads">
-        <a href="downloads/RecabStudio_3.10_Setup.exe">⬇ Installer (.exe)</a>
-        <a href="downloads/RecabStudio_3.10_Portable.zip">⬇ Portable (.zip)</a>
-        <a href="downloads/recab3.py">📄 Source Code</a>
+        <a href="downloads/RecabStudio_3.10_Setup.exe">Installer (.exe)</a>
+        <a href="downloads/RecabStudio_3.10_Portable.zip">Portable (.zip)</a>
+        <a href="downloads/recab3.py">Python Source</a>
       </div>
     </section>
 
     <section id="features" class="card">
       <h2>✨ Features</h2>
       <ul>
-        <li>🐍 Python, 🌐 JavaScript, 🧱 Blocks support</li>
-        <li>💡 Gemini AI Assistant with prompt & insert</li>
-        <li>🖥 Built-in terminal with pip installation</li>
-        <li>🎨 Switchable themes and Blockly editor</li>
-        <li>🔌 Extensions and plugin support</li>
-        <li>📂 Project explorer + multi-tab coding</li>
+        <li>🔁 Language switcher: Python, JS, Blocks (Blockly)</li>
+        <li>🧠 Gemini-powered Recab AI (1.5 Pro + 2.5 fallback)</li>
+        <li>📦 Built-in terminal (pip, system tools, batch)</li>
+        <li>🧱 Blockly visual editor with dynamic code sync</li>
+        <li>🖥 Tabbed editor, live preview, and versioning</li>
+        <li>🔌 Extensions, plugin support, and theme control</li>
+      </ul>
+    </section>
+
+    <section id="ai" class="card">
+      <h2>🤖 Recab AI</h2>
+      <p>Get coding help instantly with Gemini:</p>
+      <ul>
+        <li>Ask programming questions in any language</li>
+        <li>Use “Insert to Code” to add it directly to the editor</li>
+        <li>Or “Keep in Response” for review or docs</li>
+        <li>Fully integrated into Recab’s side panel</li>
       </ul>
     </section>
 
     <section id="changelog" class="card">
       <h2>📜 Changelog</h2>
-      <p><b>3.10</b> – Gemini AI, fallback, terminal, PyInstaller .exe, version tracking</p>
-      <p><b>3.0</b> – Language switching, first Blockly + AI merge</p>
-      <p><b>2.0</b> – First portable editor + stage-based preview</p>
-    </section>
-
-    <section id="ai" class="card">
-      <h2>🧠 Recab AI</h2>
-      <p>Powered by Gemini 1.5 Pro + 2.5 Flash fallback.</p>
       <ul>
-        <li>Prompt input and response preview</li>
-        <li>Insert-to-code or keep-as-response options</li>
-        <li>Sidebar integration with the Recab editor</li>
+        <li><strong>v3.10</strong> – Gemini AI, PyInstaller builds, terminal, version.json, AI fallback</li>
+        <li><strong>v3.0</strong> – Switch languages live, sidebar UI, AI 1.0</li>
+        <li><strong>v2.0</strong> – First full editor with Blockly & stage view</li>
       </ul>
     </section>
 
-    <section id="github" class="card">
-      <h2>🔗 GitHub</h2>
-      <p>Hosted at: <a href="https://github.com/obi-cmd/recab-studio" target="_blank" style="color:#60a5fa;">obi-cmd/recab-studio</a></p>
-    </section>
-  </div>
+  </main>
 
   <footer>
-    &copy; 2025 Obiakor Studios – All rights reserved. Version 3.10
+    &copy; 2025 Obiakor Studios — Recab Studio 3.10 • All rights reserved.
   </footer>
+
 </body>
 </html>
