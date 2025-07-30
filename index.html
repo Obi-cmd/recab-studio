@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recab Studio 3.10 – Full Developer Experience</title>
+  <title>Recab Studio 3.10 – Developer Experience</title>
   <link rel="icon" href="assets/recab-logo.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: #0e0e0f;
-      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f11;
+      color: #f0f0f0;
     }
     header {
       background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
@@ -22,74 +24,101 @@
       margin: 0;
     }
     .tagline {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-      color: #b0c4de;
+      font-size: 1.1rem;
+      color: #a0bcd0;
     }
-    .nav-links {
-      text-align: center;
-      margin-top: 1rem;
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      background: #181818;
+      padding: 0.75rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .nav-links a {
+    nav a {
       color: #00d8ff;
       text-decoration: none;
-      margin: 0 10px;
+      padding: 0.3rem 0.8rem;
+    }
+    nav a:hover {
+      background: #00aacc;
+      color: #000;
+      border-radius: 6px;
     }
     .container {
       max-width: 960px;
       margin: 2rem auto;
       padding: 1rem;
     }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+    }
     .dropdown {
       position: relative;
       display: inline-block;
     }
+    .dropdown .btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #00d8ff;
+      color: #000;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+    }
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #1c1c1c;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
-      z-index: 1;
+      background: #222;
+      min-width: 180px;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+      z-index: 10;
     }
     .dropdown-content a {
       color: white;
-      padding: 12px 16px;
-      text-decoration: none;
+      padding: 0.7rem 1rem;
       display: block;
+      text-decoration: none;
     }
-    .dropdown-content a:hover { background-color: #333; }
+    .dropdown-content a:hover { background: #333; }
     .dropdown:hover .dropdown-content { display: block; }
     .card {
       background: #1a1a1c;
       padding: 1.5rem;
       border-radius: 12px;
-      margin: 1rem 0;
-      box-shadow: 0 0 10px #111;
+      margin-top: 2rem;
+      box-shadow: 0 0 12px #111;
     }
-    .btn {
-      background: #00d8ff;
-      color: #000;
-      padding: 0.6rem 1.4rem;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: 0.3s;
-      display: inline-block;
+    .category-btns {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
-    .btn:hover { background: #00aacc; }
     .category-btns button {
-      margin: 0.3rem;
-      padding: 0.5rem 1rem;
-      background: #2a2a2a;
-      border: none;
-      border-radius: 6px;
+      background: #2c2c2e;
       color: #00d8ff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
       cursor: pointer;
+    }
+    .category-btns button:hover {
+      background: #444;
     }
     iframe {
       width: 100%;
-      height: 600px;
+      height: 580px;
       border: none;
       margin-top: 1rem;
       background: #111;
@@ -97,7 +126,7 @@
     footer {
       text-align: center;
       padding: 2rem;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #666;
     }
   </style>
@@ -109,29 +138,32 @@
 </head>
 <body>
   <header>
-    <img src="assets/recab-logo.png" alt="Recab Logo" width="96" />
+    <img src="assets/recab-logo.png" alt="Recab Logo" width="80" style="border-radius: 12px" />
     <h1>Recab Studio 3.10</h1>
-    <p class="tagline">Build smarter, code faster – powered by AI and blocks</p>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="docs.html">Docs</a>
-      <a href="about.html">About</a>
-      <a href="mailto:support@recab.ai">Contact</a>
-    </div>
+    <p class="tagline">A complete coding IDE with AI, Blocks & Projects – open & smart.</p>
   </header>
 
+  <nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="docs.html">📖 Docs</a>
+    <a href="about.html">ℹ️ About</a>
+    <a href="mailto:support@recab.ai">✉ Contact</a>
+  </nav>
+
   <div class="container">
-    <div class="dropdown">
-      <span class="btn">See Code ▼</span>
-      <div class="dropdown-content">
-        <a href="#code">HTML</a>
-        <a href="#code">Python</a>
-        <a href="#code">JSON</a>
-        <a href="#code">Other</a>
+    <div class="toolbar">
+      <div class="dropdown">
+        <div class="btn"><i class="fa fa-code"></i> See Code <i class="fa fa-caret-down"></i></div>
+        <div class="dropdown-content">
+          <a href="#code">HTML</a>
+          <a href="#code">Python</a>
+          <a href="#code">JSON</a>
+          <a href="#code">Other</a>
+        </div>
       </div>
+      <a href="downloads/RecabStudio3.10.zip" class="btn"><i class="fa fa-download"></i> Download ZIP</a>
+      <a href="#code" class="btn"><i class="fa fa-eye"></i> View Code</a>
     </div>
-    <a href="downloads/RecabStudio3.10.zip" class="btn">⬇ Download as ZIP</a>
-    <a href="#code" class="btn">🔍 View Code</a>
 
     <div id="code" class="card">
       <h2>Explore Recab Source Code</h2>
@@ -141,7 +173,7 @@
         <button onclick="showEmbed('code/version.json')">JSON</button>
         <button onclick="showEmbed('code/recab_ai.py')">AI Logic</button>
       </div>
-      <iframe id="embedFrame" src="" title="Recab Source Preview"></iframe>
+      <iframe id="embedFrame" src="" title="Recab Source Viewer"></iframe>
     </div>
   </div>
 
