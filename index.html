@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recab Studio 3.10 – Developer Experience</title>
+  <title>Recab Studio 3.10 – Home</title>
   <link rel="icon" href="assets/recab-logo.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
@@ -19,166 +19,88 @@
       padding: 2rem 1rem;
       text-align: center;
     }
-    h1 {
-      font-size: 2.8rem;
-      margin: 0;
-    }
-    .tagline {
-      font-size: 1.1rem;
-      color: #a0bcd0;
-    }
+    h1 { font-size: 2.6rem; margin: 0; }
+    .tagline { font-size: 1.1rem; color: #a0bcd0; }
     nav {
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      background: #181818;
-      padding: 0.75rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      display: flex; justify-content: center; gap: 1rem;
+      background: #181818; padding: 0.75rem; position: sticky; top: 0;
     }
     nav a {
-      color: #00d8ff;
-      text-decoration: none;
-      padding: 0.3rem 0.8rem;
-    }
-    nav a:hover {
-      background: #00aacc;
-      color: #000;
+      color: #00d8ff; text-decoration: none; padding: 0.4rem 1rem;
       border-radius: 6px;
     }
-    .container {
-      max-width: 960px;
-      margin: 2rem auto;
-      padding: 1rem;
+    nav a:hover { background: #00aacc; color: #000; }
+    .container { max-width: 960px; margin: 2rem auto; padding: 1rem; }
+    section.card {
+      background: #1a1a1c; padding: 1.5rem; border-radius: 12px;
+      margin: 2rem 0; box-shadow: 0 0 12px #111;
     }
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: space-between;
-      align-items: center;
+    .btn {
+      background: #00d8ff; color: #000;
+      padding: 0.6rem 1.4rem; text-decoration: none;
+      border-radius: 8px; font-weight: bold; display: inline-block;
+      margin: 1rem 0;
     }
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    .dropdown .btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: #00d8ff;
-      color: #000;
-      padding: 0.5rem 1.2rem;
-      border-radius: 6px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background: #222;
-      min-width: 180px;
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.6);
-      z-index: 10;
-    }
-    .dropdown-content a {
-      color: white;
-      padding: 0.7rem 1rem;
-      display: block;
-      text-decoration: none;
-    }
-    .dropdown-content a:hover { background: #333; }
-    .dropdown:hover .dropdown-content { display: block; }
-    .card {
-      background: #1a1a1c;
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin-top: 2rem;
-      box-shadow: 0 0 12px #111;
-    }
-    .category-btns {
-      margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .category-btns button {
-      background: #2c2c2e;
-      color: #00d8ff;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .category-btns button:hover {
-      background: #444;
-    }
+    .btn:hover { background: #00aacc; }
     iframe {
-      width: 100%;
-      height: 580px;
-      border: none;
-      margin-top: 1rem;
+      width: 100%; height: 580px; border: none; margin-top: 1rem;
       background: #111;
     }
     footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.85rem;
-      color: #666;
+      text-align: center; padding: 2rem; font-size: 0.9rem; color: #888;
     }
   </style>
-  <script>
-    function showEmbed(file) {
-      document.getElementById('embedFrame').src = file;
-    }
-  </script>
 </head>
 <body>
   <header>
-    <img src="assets/recab-logo.png" alt="Recab Logo" width="80" style="border-radius: 12px" />
+    <img src="assets/recab-logo.png" alt="Recab Logo" width="72" style="border-radius: 12px;" />
     <h1>Recab Studio 3.10</h1>
-    <p class="tagline">A complete coding IDE with AI, Blocks & Projects – open & smart.</p>
+    <p class="tagline">A beautiful blend of AI coding, blocks, and real development power</p>
   </header>
 
   <nav>
     <a href="index.html">🏠 Home</a>
     <a href="docs.html">📖 Docs</a>
+    <a href="downloads.html">⬇ Downloads</a>
     <a href="about.html">ℹ️ About</a>
-    <a href="mailto:support@recab.ai">✉ Contact</a>
   </nav>
 
-  <div class="container">
-    <div class="toolbar">
-      <div class="dropdown">
-        <div class="btn"><i class="fa fa-code"></i> See Code <i class="fa fa-caret-down"></i></div>
-        <div class="dropdown-content">
-          <a href="#code">HTML</a>
-          <a href="#code">Python</a>
-          <a href="#code">JSON</a>
-          <a href="#code">Other</a>
-        </div>
-      </div>
-      <a href="downloads/RecabStudio3.10.zip" class="btn"><i class="fa fa-download"></i> Download ZIP</a>
-      <a href="#code" class="btn"><i class="fa fa-eye"></i> View Code</a>
-    </div>
+  <main class="container">
+    <section class="card">
+      <h2>📖 The Story of Recab</h2>
+      <p>Recab was born from the idea that developers should be able to switch between visual programming and typed code effortlessly — and supercharge their projects with AI.</p>
+    </section>
 
-    <div id="code" class="card">
-      <h2>Explore Recab Source Code</h2>
-      <div class="category-btns">
-        <button onclick="showEmbed('code/index.html')">HTML</button>
-        <button onclick="showEmbed('code/recab3.py')">Python</button>
-        <button onclick="showEmbed('code/version.json')">JSON</button>
-        <button onclick="showEmbed('code/recab_ai.py')">AI Logic</button>
-      </div>
-      <iframe id="embedFrame" src="" title="Recab Source Viewer"></iframe>
-    </div>
-  </div>
+    <section class="card">
+      <h2>✨ Features</h2>
+      <ul>
+        <li>🐍 Python, 🌐 JavaScript, 🧱 Blockly tabs</li>
+        <li>📁 Project manager to open/save files</li>
+        <li>💻 Built-in terminal view</li>
+        <li>🤖 Gemini-powered Recab AI Assistant</li>
+        <li>🎵 Theme music + 🎬 splash video support</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>🧪 Try Recab Mini</h2>
+      <p>Preview the Recab experience right here — switch editors and simulate a session.</p>
+      <iframe src="code/recab3.py" title="Recab Mini Preview"></iframe>
+    </section>
+
+    <section class="card">
+      <h2>📋 Changelog</h2>
+      <ul>
+        <li><b>v3.10</b>: Full AI integration, terminal preview, enhanced UI</li>
+        <li><b>v3.0</b>: Initial release with editor + blocks</li>
+      </ul>
+    </section>
+
+    <a class="btn" href="downloads/RecabStudio3.10.zip">⬇ Download Full Recab Studio</a>
+  </main>
 
   <footer>
-    &copy; 2025 Obiakor Studios · <a href="mailto:support@recab.ai">support@recab.ai</a>
+    &copy; 2025 Obiakor Studios – <a href="mailto:support@recab.ai" style="color:#00d8ff;">support@recab.ai</a>
   </footer>
 </body>
 </html>
