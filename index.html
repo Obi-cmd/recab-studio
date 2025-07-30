@@ -1,227 +1,152 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recab Studio 3.10</title>
-  <link rel="icon" href="assets/recab-logo.png" type="image/png" />
+  <title>Recab Studio 3.10 – Full Developer Experience</title>
+  <link rel="icon" href="assets/recab-logo.png" />
   <style>
-    :root {
-      --bg-dark: #0d1117;
-      --fg-dark: #c9d1d9;
-      --card-dark: #161b22;
-      --border-dark: #30363d;
-      --accent: #3b82f6;
-      --green: #2ea043;
-
-      --bg-light: #ffffff;
-      --fg-light: #1f2937;
-      --card-light: #f3f4f6;
-      --border-light: #d1d5db;
-    }
-    [data-theme="dark"] {
-      --bg: var(--bg-dark);
-      --fg: var(--fg-dark);
-      --card: var(--card-dark);
-      --border: var(--border-dark);
-    }
-    [data-theme="light"] {
-      --bg: var(--bg-light);
-      --fg: var(--fg-light);
-      --card: var(--card-light);
-      --border: var(--border-light);
-    }
-
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-    html, body {
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      transition: background 0.4s ease, color 0.4s ease;
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #0e0e0f;
+      color: #fff;
     }
     header {
-      text-align: center;
-      padding: 3rem 1rem 2rem;
-      background: linear-gradient(135deg, #4f46e5, #3b82f6);
-      color: white;
-    }
-    header img {
-      width: 72px;
-      height: 72px;
-      border-radius: 12px;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      margin: 1rem 0 0.2rem;
-    }
-    header p {
-      font-size: 1.1rem;
-      color: #e2e8f0;
-    }
-
-    .theme-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
-    .theme-toggle button {
-      padding: 6px 12px;
-      border-radius: 6px;
-      background: #111827;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    nav {
-      background: var(--card);
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      padding: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-    nav a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
       padding: 2rem 1rem;
+      text-align: center;
     }
-
-    .card {
-      background: var(--card);
-      margin: 1.5rem 0;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      border: 1px solid var(--border);
-      transition: transform 0.3s ease;
+    h1 {
+      font-size: 2.8rem;
+      margin: 0;
     }
-    .card:hover {
-      transform: scale(1.02);
+    .tagline {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      color: #b0c4de;
     }
-    .card h2 {
-      margin-bottom: 1rem;
-    }
-
-    .downloads a {
-      display: inline-block;
-      margin: 0.5rem 1rem 0.5rem 0;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      background: var(--green);
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    .downloads a:hover {
-      background: #238636;
-    }
-
-    ul {
+    .nav-links {
+      text-align: center;
       margin-top: 1rem;
-      padding-left: 1.5rem;
     }
-
+    .nav-links a {
+      color: #00d8ff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #1c1c1c;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover { background-color: #333; }
+    .dropdown:hover .dropdown-content { display: block; }
+    .card {
+      background: #1a1a1c;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1rem 0;
+      box-shadow: 0 0 10px #111;
+    }
+    .btn {
+      background: #00d8ff;
+      color: #000;
+      padding: 0.6rem 1.4rem;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+      display: inline-block;
+    }
+    .btn:hover { background: #00aacc; }
+    .category-btns button {
+      margin: 0.3rem;
+      padding: 0.5rem 1rem;
+      background: #2a2a2a;
+      border: none;
+      border-radius: 6px;
+      color: #00d8ff;
+      cursor: pointer;
+    }
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      margin-top: 1rem;
+      background: #111;
+    }
     footer {
       text-align: center;
-      color: var(--fg);
-      padding: 2.5rem 1rem;
-      font-size: 0.95rem;
-      border-top: 1px solid var(--border);
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #666;
     }
   </style>
-</head>
-<body>
-
-  <div class="theme-toggle">
-    <button onclick="toggleTheme()">Toggle Theme</button>
-  </div>
-
-  <header>
-    <img src="assets/recab-logo.png" alt="Recab Logo">
-    <h1>Recab Studio</h1>
-    <p>Multi-language Coding Platform with Visual Tools & Gemini AI</p>
-    <p><a href="https://github.com/obi-cmd/recab-studio" target="_blank" style="color: #bbf7d0;">View on GitHub</a></p>
-  </header>
-
-  <nav>
-    <a href="#download">Download</a>
-    <a href="#features">Features</a>
-    <a href="#ai">Recab AI</a>
-    <a href="#changelog">Changelog</a>
-    <a href="https://github.com/obi-cmd/recab-studio" target="_blank">GitHub</a>
-  </nav>
-
-  <main class="container">
-    <section id="download" class="card">
-      <h2>📦 Download Recab Studio</h2>
-      <p>Choose your version:</p>
-      <div class="downloads">
-        <a href="downloads/RecabStudio_3.10_Setup.exe">Installer (.exe)</a>
-        <a href="downloads/RecabStudio_3.10_Portable.zip">Portable (.zip)</a>
-        <a href="downloads/recab3.py">Python Source</a>
-      </div>
-    </section>
-
-    <section id="features" class="card">
-      <h2>✨ Features</h2>
-      <ul>
-        <li>🔁 Switch languages: Python, JavaScript, Blockly</li>
-        <li>🧠 Gemini AI (1.5 + 2.5 fallback) for coding assistance</li>
-        <li>📂 Tabbed editor, built-in terminal & extension support</li>
-        <li>🎨 Modern UI with theme switching</li>
-        <li>📦 Portable or installer options</li>
-      </ul>
-    </section>
-
-    <section id="ai" class="card">
-      <h2>🤖 Recab AI</h2>
-      <ul>
-        <li>Sidebar integration for prompting Gemini API</li>
-        <li>Options to insert AI output directly to your code</li>
-        <li>Supports multiple models (1.5 Pro / 2.5 Flash fallback)</li>
-      </ul>
-    </section>
-
-    <section id="changelog" class="card">
-      <h2>📜 Changelog</h2>
-      <ul>
-        <li><strong>v3.10</strong> — Gemini AI, Terminal, Installer + Portable</li>
-        <li><strong>v3.0</strong> — Multi-language switcher, Recab AI v1</li>
-        <li><strong>v2.0</strong> — Blockly, stage-based visual coding</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-    &copy; 2025 Obiakor Studios — <a href="https://github.com/obi-cmd/recab-studio" target="_blank">github.com/obi-cmd/recab-studio</a>
-  </footer>
-
   <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const current = html.getAttribute("data-theme");
-      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    function showEmbed(file) {
+      document.getElementById('embedFrame').src = file;
     }
   </script>
+</head>
+<body>
+  <header>
+    <img src="assets/recab-logo.png" alt="Recab Logo" width="96" />
+    <h1>Recab Studio 3.10</h1>
+    <p class="tagline">Build smarter, code faster – powered by AI and blocks</p>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="docs.html">Docs</a>
+      <a href="about.html">About</a>
+      <a href="mailto:support@recab.ai">Contact</a>
+    </div>
+  </header>
 
+  <div class="container">
+    <div class="dropdown">
+      <span class="btn">See Code ▼</span>
+      <div class="dropdown-content">
+        <a href="#code">HTML</a>
+        <a href="#code">Python</a>
+        <a href="#code">JSON</a>
+        <a href="#code">Other</a>
+      </div>
+    </div>
+    <a href="downloads/RecabStudio3.10.zip" class="btn">⬇ Download as ZIP</a>
+    <a href="#code" class="btn">🔍 View Code</a>
+
+    <div id="code" class="card">
+      <h2>Explore Recab Source Code</h2>
+      <div class="category-btns">
+        <button onclick="showEmbed('code/index.html')">HTML</button>
+        <button onclick="showEmbed('code/recab3.py')">Python</button>
+        <button onclick="showEmbed('code/version.json')">JSON</button>
+        <button onclick="showEmbed('code/recab_ai.py')">AI Logic</button>
+      </div>
+      <iframe id="embedFrame" src="" title="Recab Source Preview"></iframe>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Obiakor Studios · <a href="mailto:support@recab.ai">support@recab.ai</a>
+  </footer>
 </body>
 </html>
