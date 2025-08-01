@@ -1,0 +1,32 @@
+{
+  "versions": [
+    {
+      "name": "Recab Studio 3.0",
+      "build": "31000",
+      "date": "2025-05-01",
+      "portable": "downloads/RecabStudio3.0Portable.zip",
+      "installer": "downloads/RecabStudio3.0Installer.exe"
+    },
+    {
+      "name": "Recab Studio 2.5",
+      "build": "25000",
+      "date": "2025-03-01",
+      "portable": "downloads/RecabStudio2.5Portable.zip",
+      "installer": "downloads/RecabStudio2.5Installer.exe"
+    },
+    {
+      "name": "Recab Studio 2.0",
+      "build": "20000",
+      "date": "2025-01-01",
+      "portable": "downloads/RecabStudio2.0Portable.zip",
+      "installer": "downloads/RecabStudio2.0Installer.exe"
+    },
+    {
+      "name": "Recab Studio 1.0",
+      "build": "10000",
+      "date": "2024-09-01",
+      "portable": "downloads/RecabStudio1.0Portable.zip",
+      "installer": "downloads/RecabStudio1.0Installer.exe"
+    }
+  ]
+}
