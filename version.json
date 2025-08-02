@@ -1,5 +1,13 @@
 {
   "version": "3.10",
+  {
+  "name": "Recab Studio",
+  "version": "3.10",
+  "build": "2025.07.26",
+  "buildStatus": "stable",
+  "latest": true,
+  "releaseDate": "2025-07-27",
+  "download": "https://obi-cmd.github.io/recab-studio/downloads/RecabStudio_3.10_Setup.exe",
   "download_url": "https://obi-cmd.github.io/recab-studio/downloads/RecabStudio_3.10_Setup.exe",
   "changelog": "Gemini AI, pip terminal, sidebar, chat history, themes, blockly, tabbed output, updater"
 }
