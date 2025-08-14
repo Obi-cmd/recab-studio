@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Previous Recab Versions</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .size-info, .hash-info {
+      font-size: 0.85em;
+      color: #777;
+      display: block;
+      margin-top: 4px;
+      word-break: break-all;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -23,29 +32,82 @@
       <h2>Recab Studio 3.0 (Build 31000)</h2>
       <p><small>Released May 2025</small></p>
       <a class="btn" href="https://github.com/Obi-cmd/recab-studio/releases/download/v3.0/RecabStudio3.0Installer.zip">💽 Installer (ZIP)</a>
+      <span class="size-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v3.0/RecabStudio3.0Installer.zip"></span>
+      <span class="hash-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v3.0/RecabStudio3.0Installer.zip"></span>
+
       <a class="btn" href="https://github.com/Obi-cmd/recab-studio/releases/download/v3.0/RecabStudio3.0Portable.zip">📦 Portable (ZIP)</a>
+      <span class="size-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v3.0/RecabStudio3.0Portable.zip"></span>
+      <span class="hash-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v3.0/RecabStudio3.0Portable.zip"></span>
     </section>
+
     <section class="card">
       <h2>Recab Studio 2.5 (Build 25000)</h2>
       <p><small>Released March 2025</small></p>
       <a class="btn" href="https://github.com/Obi-cmd/recab-studio/releases/download/v2.5/RecabStudio2.5Installer.zip">💽 Installer (ZIP)</a>
+      <span class="size-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v2.5/RecabStudio2.5Installer.zip"></span>
+      <span class="hash-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v2.5/RecabStudio2.5Installer.zip"></span>
+
       <a class="btn" href="https://github.com/Obi-cmd/recab-studio/releases/download/v2.5/RecabStudio2.5Portable.zip">📦 Portable (ZIP)</a>
+      <span class="size-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v2.5/RecabStudio2.5Portable.zip"></span>
+      <span class="hash-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v2.5/RecabStudio2.5Portable.zip"></span>
     </section>
+
     <section class="card">
       <h2>Recab Studio 2.0 (Build 20000)</h2>
       <p><small>Released January 2025</small></p>
       <a class="btn" href="https://github.com/Obi-cmd/recab-studio/releases/download/v2.0/RecabStudio2.0Installer.zip">💽 Installer (ZIP)</a>
+      <span class="size-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v2.0/RecabStudio2.0Installer.zip"></span>
+      <span class="hash-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v2.0/RecabStudio2.0Installer.zip"></span>
+
       <a class="btn" href="https://github.com/Obi-cmd/recab-studio/releases/download/v2.0/RecabStudio2.0Portable.zip">📦 Portable (ZIP)</a>
+      <span class="size-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v2.0/RecabStudio2.0Portable.zip"></span>
+      <span class="hash-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v2.0/RecabStudio2.0Portable.zip"></span>
     </section>
+
     <section class="card">
       <h2>Recab Studio 1.0 (Build 10000)</h2>
       <p><small>Released September 2024</small></p>
       <a class="btn" href="https://github.com/Obi-cmd/recab-studio/releases/download/v1.0/RecabStudio1.0Installer.zip">💽 Installer (ZIP)</a>
+      <span class="size-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v1.0/RecabStudio1.0Installer.zip"></span>
+      <span class="hash-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v1.0/RecabStudio1.0Installer.zip"></span>
+
       <a class="btn" href="https://github.com/Obi-cmd/recab-studio/releases/download/v1.0/RecabStudio1.0Portable.zip">📦 Portable (ZIP)</a>
+      <span class="size-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v1.0/RecabStudio1.0Portable.zip"></span>
+      <span class="hash-info" data-url="https://github.com/Obi-cmd/recab-studio/releases/download/v1.0/RecabStudio1.0Portable.zip"></span>
     </section>
   </main>
   <footer>
     &copy; 2025 Obiakor Studios – <a href="mailto:recab.help@gmail.com">recab.help@gmail.com</a>
   </footer>
+
+  <script>
+    async function getHash(url) {
+      const resp = await fetch(url);
+      const buffer = await resp.arrayBuffer();
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    document.querySelectorAll('.size-info').forEach(span => {
+      fetch(span.dataset.url, { method: 'HEAD' }).then(r => {
+        const size = r.headers.get('Content-Length');
+        if (size) {
+          const mb = (size / (1024*1024)).toFixed(1);
+          span.textContent = `File size: ${mb} MB`;
+        }
+      }).catch(() => span.textContent = '');
+    });
+
+    document.querySelectorAll('.hash-info').forEach(async span => {
+      span.textContent = 'Calculating SHA-256...';
+      try {
+        const hash = await getHash(span.dataset.url);
+        span.textContent = `SHA-256: ${hash}`;
+      } catch {
+        span.textContent = '';
+      }
+    });
+  </script>
 </body>
 </html>
