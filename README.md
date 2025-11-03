@@ -26,7 +26,7 @@ It combines a stunning UI with intelligent features like Gemini AI, a real termi
 
 ## 🖥️ Screenshot
 
-> ![Preview](assets/recab-logo.png)  
+> ![Preview](recab-logo.png)  
 > Full UI, terminal, and Gemini integration in action.
 
 ---
