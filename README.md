@@ -1,4 +1,4 @@
-# 🚀 Recab Studio 3.10
+# ![Recab Banner](recab-logo.png) Recab Studio 3.10
 
 Recab Studio is a powerful, modern, open-source multi-language development environment for beginners and advanced developers alike.  
 It combines a stunning UI with intelligent features like Gemini AI, a real terminal, code runner, and a full visual Blockly editor.
