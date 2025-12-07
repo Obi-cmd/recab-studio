@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Recab Mini Web IDE – ABCD Edition</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ✓ Monaco Editor (VS Code) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+
+<!-- ✓ Pyodide (Run Python in Browser) -->
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+
+<style>
+    body {
+        margin: 0;
+        background: #1e1e1e;
+        color: white;
+        font-family: "Segoe UI", Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    header {
+        background: #0d0d0d;
+        padding: 12px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 3px solid #3a3a3a;
+        box-shadow: 0 0 10px #000 inset;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 600;
+        color: #4ec9b0;
+        text-shadow: 0 0 8px #0f0;
+    }
+
+    .toolbar {
+        display: flex;
+        gap: 10px;
+    }
+
+    .toolbar button {
+        background: linear-gradient(145deg, #0e639c, #0b4f7d);
+        border: none;
+        padding: 7px 16px;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        box-shadow: 0 0 6px #000;
+        transition: .2s;
+    }
+
+    .toolbar button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 12px #0099ff;
+    }
+
+    #container {
+        display: grid;
+        grid-template-columns: 240px auto;
+        height: calc(100vh - 60px);
+    }
+
+    /* ---- Sidebar ---- */
+    #sidebar {
+        background: #252526;
+        border-right: 2px solid #333;
+        padding: 12px;
+        box-sizing: border-box;
+        overflow-y: auto;
+    }
+
+    #sidebar h3 {
+        margin-top: 0;
+        font-size: 15px;
+        color: #9cdcfe;
+    }
+
+    .file-item {
+        padding: 8px 10px;
+        background: #2d2d2d;
+        margin-bottom: 6px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: .15s;
+    }
+
+    .file-item:hover {
+        background: #3c3c3c;
+    }
+
+    /* ---- Tab Bar ---- */
+    #tabs {
+        display: flex;
+        background: #1b1b1b;
+        border-bottom: 2px solid #333;
+        height: 40px;
+        align-items: center;
+        padding-left: 10px;
+        gap: 6px;
+    }
+
+    .tab {
+        background: #2d2d2d;
+        padding: 6px 14px;
+        border-radius: 8px 8px 0 0;
+        cursor: pointer;
+        transition: .2s;
+    }
+
+    .tab.active {
+        background: #1e1e1e;
+        border-bottom: 2px solid #1e1e1e;
+        font-weight: bold;
+        color: #4ec9b0;
+    }
+
+    .tab:hover {
+        background: #3c3c3c;
+    }
+
+    /* ---- Editor ---- */
+    #editorArea {
+        position: relative;
+    }
+
+    #editor {
+        width: 100%;
+        height: calc(100% - 160px);
+    }
+
+    #output {
+        height: 160px;
+        background: #111;
+        border-top: 2px solid #333;
+        color: #dcdcdc;
+        padding: 10px;
+        font-family: Consolas, monospace;
+        font-size: 14px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Recab Mini Web IDE – ABCD Edition</h1>
+    <div class="toolbar">
+        <button onclick="newTab()">New Tab</button>
+        <button onclick="openFile()">Open</button>
+        <button onclick="saveFile()">Save</button>
+        <button onclick="runPython()">▶ Run Python</button>
+        <button onclick="runJS()">▶ Run JS</button>
+        <button onclick="clearOutput()">Clear Output</button>
+    </div>
+</header>
+
+<div id="container">
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <h3>📁 Explorer</h3>
+        <div class="file-item">main.py</div>
+        <div class="file-item">hello.js</div>
+        <div class="file-item">style.css</div>
+        <div class="file-item">data.json</div>
+        <p style="opacity:.5;margin-top:10px;">Static Preview Only</p>
+    </div>
+
+    <!-- Editor + Tabs -->
+    <div id="editorArea">
+
+        <div id="tabs"></div>
+
+        <div id="editor"></div>
+
+        <div id="output">Output will appear here…</div>
+    </div>
+
+</div>
+
+<script>
+/* -------------------------------------------------
+   GLOBALS
+--------------------------------------------------*/
+let tabs = [];
+let currentTab = -1;
+let editor;
+let pyodide;
+
+/* -------------------------------------------------
+   MONACO LOADER
+--------------------------------------------------*/
+require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } });
+require(["vs/editor/editor.main"], function () {
+    editor = monaco.editor.create(document.getElementById("editor"), {
+        value: "print('Recab Mini Web IDE – Python Running!')",
+        language: "python",
+        theme: "vs-dark",
+        automaticLayout: true
+    });
+
+    newTab("main.py", editor.getValue());
+});
+
+/* -------------------------------------------------
+   TABS
+--------------------------------------------------*/
+function refreshTabs() {
+    const bar = document.getElementById("tabs");
+    bar.innerHTML = "";
+
+    tabs.forEach((tab, i) => {
+        const div = document.createElement("div");
+        div.className = "tab" + (i === currentTab ? " active" : "");
+        div.textContent = tab.name;
+
+        div.onclick = () => switchTab(i);
+
+        bar.appendChild(div);
+    });
+}
+
+function newTab(name = "untitled.py", content = "") {
+    tabs.push({ name, content, type: name.endsWith(".js") ? "javascript" : "python" });
+    switchTab(tabs.length - 1);
+}
+
+function switchTab(i) {
+    saveTab();
+    currentTab = i;
+    const tab = tabs[i];
+
+    editor.setValue(tab.content);
+    editor.updateOptions({ language: tab.type });
+    refreshTabs();
+}
+
+function saveTab() {
+    if (currentTab < 0) return;
+    tabs[currentTab].content = editor.getValue();
+}
+
+/* -------------------------------------------------
+   OPEN / SAVE
+--------------------------------------------------*/
+function openFile() {
+    const input = document.createElement("input");
+    input.type = "file";
+
+    input.onchange = async e => {
+        const file = e.target.files[0];
+        const text = await file.text();
+        newTab(file.name, text);
+    };
+
+    input.click();
+}
+
+function saveFile() {
+    saveTab();
+    const blob = new Blob([tabs[currentTab].content], { type: "text/plain" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = tabs[currentTab].name;
+    a.click();
+}
+
+/* -------------------------------------------------
+   OUTPUT
+--------------------------------------------------*/
+function writeOutput(text) {
+    const out = document.getElementById("output");
+    out.textContent += text + "\n";
+    out.scrollTop = out.scrollHeight;
+}
+
+function clearOutput() {
+    document.getElementById("output").textContent = "";
+}
+
+/* -------------------------------------------------
+   PYTHON (Pyodide)
+--------------------------------------------------*/
+async function runPython() {
+    writeOutput("▶ Running Python…");
+
+    saveTab();
+    const code = tabs[currentTab].content;
+
+    if (!pyodide) {
+        writeOutput("Loading Pyodide…");
+        pyodide = await loadPyodide();
+        writeOutput("Pyodide loaded!");
+    }
+
+    try {
+        const result = await pyodide.runPythonAsync(code);
+        writeOutput(String(result));
+    } catch (e) {
+        writeOutput("❌ " + e);
+    }
+}
+
+/* -------------------------------------------------
+   JS EXECUTION
+--------------------------------------------------*/
+function runJS() {
+    writeOutput("▶ Running JavaScript…");
+
+    saveTab();
+    const code = tabs[currentTab].content;
+
+    try {
+        const result = eval(code);
+        writeOutput(String(result));
+    } catch (e) {
+        writeOutput("❌ " + e);
+    }
+}
+</script>
+
+</body>
+</html>
