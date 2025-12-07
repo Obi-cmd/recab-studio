@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Recab Mini Web IDE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Load Monaco Editor -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+
+<style>
+    body {
+        margin: 0;
+        background: #1e1e1e;
+        color: white;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    header {
+        background: #111;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid #333;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 20px;
+        color: #4ec9b0;
+    }
+
+    .toolbar {
+        display: flex;
+        gap: 10px;
+    }
+
+    .toolbar button {
+        background: #0e639c;
+        border: none;
+        padding: 7px 14px;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .toolbar button:hover {
+        background: #117bbd;
+    }
+
+    #container {
+        display: flex;
+        height: calc(100vh - 60px);
+    }
+
+    #sidebar {
+        width: 200px;
+        background: #252526;
+        border-right: 2px solid #333;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    #sidebar h3 {
+        color: #9cdcfe;
+        font-size: 14px;
+        margin-top: 0;
+    }
+
+    #editorArea {
+        flex-grow: 1;
+        position: relative;
+    }
+
+    #editor {
+        width: 100%;
+        height: 100%;
+    }
+
+    #output {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 160px;
+        background: #1b1b1b;
+        border-top: 2px solid #333;
+        font-family: Consolas, monospace;
+        font-size: 13px;
+        color: #dcdcdc;
+        padding: 8px;
+        overflow-y: auto;
+    }
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Recab Mini Web IDE</h1>
+
+    <div class="toolbar">
+        <button onclick="newFile()">New</button>
+        <button onclick="openFile()">Open</button>
+        <button onclick="downloadFile()">Save</button>
+        <button onclick="runCode()">▶ Run</button>
+        <button onclick="clearOutput()">Clear Output</button>
+    </div>
+</header>
+
+<div id="container">
+    <div id="sidebar">
+        <h3>📁 Explorer</h3>
+        <p style="opacity:0.5;">(Static in web edition)</p>
+    </div>
+
+    <div id="editorArea">
+        <div id="editor"></div>
+        <div id="output">Output will appear here...</div>
+    </div>
+</div>
+
+<script>
+let editor;
+
+// Load Monaco Editor
+require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' }});
+require(["vs/editor/editor.main"], function () {
+    editor = monaco.editor.create(document.getElementById("editor"), {
+        value: `# Welcome to Recab Mini Web Edition\n# Python-like syntax highlighting\nprint("Hello from Recab Mini!")`,
+        language: "python",
+        theme: "vs-dark",
+        automaticLayout: true
+    });
+});
+
+// --- Toolbar Functions ---
+
+function newFile() {
+    editor.setValue("");
+}
+
+function openFile() {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".txt,.py,.js,.html,.css,.json";
+
+    input.onchange = e => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = () => editor.setValue(reader.result);
+        reader.readAsText(file);
+    };
+
+    input.click();
+}
+
+function downloadFile() {
+    const blob = new Blob([editor.getValue()], { type: "text/plain" });
+    const a = document.createElement("a");
+    a.download = "recab_code.txt";
+    a.href = URL.createObjectURL(blob);
+    a.click();
+}
+
+function runCode() {
+    const output = document.getElementById("output");
+    output.innerHTML += "\n▶ Running...\n";
+
+    try {
+        // Only JS can run in browser without Pyodide
+        const code = editor.getValue();
+        output.innerHTML += eval(code) + "\n";
+    } catch (err) {
+        output.innerHTML += "❌ Error: " + err + "\n";
+    }
+
+    output.scrollTop = output.scrollHeight;
+}
+
+function clearOutput() {
+    document.getElementById("output").innerHTML = "";
+}
+</script>
+
+</body>
+</html>
